@@ -1,5 +1,6 @@
-![Logo do letmeask](.github/logo.svg)
-
+<p align="center">
+	<img alt="Logo do Letmeask" src=".github/logo.svg" width="160px">
+</p>
 
 
 # ![letmeask](.github/cover.svg)
