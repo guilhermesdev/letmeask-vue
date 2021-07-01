@@ -1,0 +1,180 @@
+@import 'colors';
+
+.container {
+	max-width: 1120px;
+}
+
+.screenheight {
+	min-height: 100vh;
+}
+
+.fullheight {
+	height: 100%;
+}
+
+.screenwidth {
+	min-width: 100vw;
+}
+
+.fullwidth {
+	width: 100%;
+}
+
+.flex {
+	display: flex;
+
+	&-column {
+		flex-direction: column;
+	}
+
+	&-row {
+		flex-direction: row;
+	}
+}
+
+.items- {
+	&center {
+		align-items: center;
+	}
+
+	&stretch {
+		align-items: stretch;
+	}
+
+	&start {
+		align-items: flex-start;
+	}
+
+	&end {
+		align-items: flex-end;
+	}
+}
+
+.justify- {
+	&center {
+		justify-content: center;
+	}
+
+	&between {
+		justify-content: space-between;
+	}
+
+	&end {
+		justify-content: flex-end;
+	}
+}
+
+@for $number from 1 through 10 {
+	.flex-#{$number} {
+		flex: $number;
+	}
+}
+
+.self- {
+	&center {
+		align-self: center;
+	}
+}
+
+@each $name, $color in $all-colors {
+	.bg-#{$name} {
+		background-color: $color;
+	}
+
+	.color-#{$name} {
+		color: $color;
+	}
+}
+
+@for $spacing from 1 through 16 {
+	.p {
+		&-#{$spacing} {
+			padding: $spacing * 1rem !important;
+		}
+
+		&t-#{$spacing} {
+			padding-top: $spacing * 1rem !important;
+		}
+
+		&b-#{$spacing} {
+			padding-bottom: $spacing * 1rem !important;
+		}
+
+		&l-#{$spacing} {
+			padding-left: $spacing * 1rem !important;
+		}
+
+		&r-#{$spacing} {
+			padding-right: $spacing * 1rem !important;
+		}
+
+		&x-#{$spacing} {
+			padding-left: $spacing * 1rem !important;
+			padding-right: $spacing * 1rem !important;
+		}
+
+		&y-#{$spacing} {
+			padding-top: $spacing * 1rem !important;
+			padding-bottom: $spacing * 1rem !important;
+		}
+	}
+
+	.m {
+		&-#{$spacing} {
+			margin: $spacing * 1rem !important;
+		}
+		&t-#{$spacing} {
+			margin-top: $spacing * 1rem !important;
+		}
+
+		&b-#{$spacing} {
+			margin-bottom: $spacing * 1rem !important;
+		}
+
+		&l-#{$spacing} {
+			margin-left: $spacing * 1rem !important;
+		}
+
+		&r-#{$spacing} {
+			margin-right: $spacing * 1rem !important;
+		}
+
+		&x-#{$spacing} {
+			margin-left: $spacing * 1rem !important;
+			margin-right: $spacing * 1rem !important;
+		}
+
+		&y-#{$spacing} {
+			margin-top: $spacing * 1rem !important;
+			margin-bottom: $spacing * 1rem !important;
+		}
+	}
+
+	.text-#{$spacing} {
+		font-size: $spacing * 1rem !important;
+	}
+}
+
+.mx-auto {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.my-auto {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+@for $width from 1 to 100 {
+	.max-w-#{$width} {
+		max-width: ($width/3) * 1rem;
+	}
+}
+
+.max-w-800px {
+	max-width: 800px;
+}
+
+.border-none {
+	border: 0;
+}

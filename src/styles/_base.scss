@@ -1,0 +1,68 @@
+@import 'reset';
+@import 'typography';
+@import 'colors';
+
+html {
+	font-size: $base-font-size;
+	max-width: 100vw;
+}
+
+body {
+	color: $color-black;
+	background-color: $color-bg;
+}
+
+body,
+input,
+button,
+textarea {
+	font: 400 $base-font-size $font-text;
+}
+
+input {
+	height: 50px;
+	border-radius: 8px;
+	padding: 0 1.5rem;
+	background-color: #fff;
+	border: 1px solid $color-gray-medium;
+	font-size: 1.5rem;
+}
+
+small {
+	font-size: 14px;
+}
+
+a {
+	color: $color-secondary-dark;
+	transition: 0.2s;
+	cursor: pointer;
+
+	&:hover {
+		color: $color-secondary-light;
+	}
+}
+
+textarea {
+	border: 0;
+	border-radius: 8px;
+	padding: 2rem;
+
+	height: 133px;
+	width: 100%;
+
+	font-size: 16px;
+	resize: vertical;
+
+	background-color: $color-details;
+
+	&::placeholder {
+		color: $color-gray-dark;
+	}
+
+	outline-color: $color-primary;
+}
+
+button {
+	cursor: pointer;
+	font-size: 14px;
+}

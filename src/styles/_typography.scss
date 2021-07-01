@@ -1,0 +1,17 @@
+$font-text: 'Roboto', sans-serif;
+$font-highlight: 'Poppins', sans-serif;
+$base-font-size: 12px;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: $font-highlight;
+	line-height: 3.5rem;
+}
+
+p {
+	line-height: 2.6rem;
+}

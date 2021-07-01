@@ -1,0 +1,41 @@
+$color-primary: #835afd;
+$color-primary-dark: #6f4bd8;
+$color-secondary-light: #d67ee2;
+$color-secondary-dark: #e559f9;
+$color-danger: #e73f5d;
+$color-danger-dark: #d73754;
+
+$color-google: #ea4335;
+
+$color-gray-light: #dbdcdd;
+$color-gray-light-hover: #cecece;
+$color-gray-medium: #a8a8b3;
+$color-gray-medium-hover: #7e7e86;
+$color-gray-dark: #737380;
+$color-black: #29292e;
+
+$color-shadow: #050206;
+$color-bg: #f8f8f8;
+$color-details: #fefefe;
+$color-highlighted: #f4f0ff;
+
+$gradient: linear-gradient(139.44deg, #485bff 0%, #ff59f8 96.19%);
+
+$all-colors: (
+	'primary': $color-primary,
+	'primary-dark': $color-primary-dark,
+	'secondary-light': $color-secondary-light,
+	'secondary-dark': $color-secondary-dark,
+	'danger': $color-danger,
+	'danger-dark': $color-danger-dark,
+	'gray-light': $color-gray-light,
+	'gray-light-hover': $color-gray-light-hover,
+	'gray-medium': $color-gray-medium,
+	'gray-medium-hover': $color-gray-medium-hover,
+	'gray-dark': $color-gray-dark,
+	'black': $color-black,
+	'shadow': $color-shadow,
+	'white': $color-bg,
+	'detail': $color-details,
+	'pure-white': #fff
+);
