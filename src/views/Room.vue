@@ -95,6 +95,7 @@ import Question from '@/components/Question';
 import { mapState } from 'vuex';
 
 import { db } from '@/firebase';
+import { getObjectLength } from '@/utils';
 
 export default {
 	name: 'Room',
@@ -108,14 +109,14 @@ export default {
 		return {
 			roomId: this.$route.params.id,
 			roomName: '',
-			questions: {},
+			questions: [],
 			newQuestion: ''
 		};
 	},
 	computed: {
 		...mapState(['user']),
 		questionsNumber() {
-			return Object.keys(this.questions).length;
+			return this.questions.length;
 		}
 	},
 	watch: {
@@ -129,10 +130,13 @@ export default {
 	},
 	methods: {
 		getLikeId(likes) {
-			const id = Object.entries(likes || {}).find(
-				([, like]) => like.authorId === this.user.id
+			if (!likes) return null;
+
+			const { id } = Object.values(likes).find(
+				like => like.authorId === this.user.id
 			);
-			return id ? id[0] : false;
+
+			return id;
 		},
 		async handleSendQuestion() {
 			if (!this.newQuestion) return;
@@ -142,7 +146,10 @@ export default {
 				return;
 			}
 
+			const questionRef = await db.ref(`rooms/${this.roomId}/questions`).push();
+
 			const question = {
+				id: questionRef.key,
 				content: this.newQuestion,
 				author: {
 					name: this.user.name,
@@ -152,7 +159,7 @@ export default {
 				isAnswered: false
 			};
 
-			await db.ref(`rooms/${this.roomId}/questions`).push(question);
+			await questionRef.set(question);
 
 			this.newQuestion = '';
 		},
@@ -163,22 +170,15 @@ export default {
 				const { title, questions } = room.val();
 				this.roomName = title;
 
-				const parsedQuestions = Object.entries(questions || '').map(
-					([key, value]) => {
-						return {
-							id: key,
-							content: value.content,
-							author: value.author,
-							likes: value.likes,
-							isHighlighted: value.isHighlighted,
-							isAnswered: value.isAnswered,
-							likeCount: Object.keys(value.likes || {}).length,
-							likeId: this.getLikeId(value.likes)
-						};
-					}
-				);
+				if (!questions) return;
 
-				const sortedQuestions = parsedQuestions
+				const questionsArray = Object.values(questions).map(question => ({
+					...question,
+					likeId: this.getLikeId(question.likes)
+				}));
+
+				const sortedQuestions = questionsArray
+					.sort((a, b) => -getObjectLength(a.likes) - getObjectLength(b.likes))
 					.sort((a, b) => -(a.isHighlighted - b.isHighlighted))
 					.sort((a, b) => a.isAnswered - b.isAnswered);
 
@@ -191,11 +191,13 @@ export default {
 					.ref(`rooms/${this.roomId}/questions/${questionId}/likes/${likeId}`)
 					.remove();
 			} else {
-				await db
+				const likeRef = await db
 					.ref(`rooms/${this.roomId}/questions/${questionId}/likes`)
 					.push({
 						authorId: this.user.id
 					});
+
+				await likeRef.update({ id: likeRef.key });
 			}
 		}
 	}
